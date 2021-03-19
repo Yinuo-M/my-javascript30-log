@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>JS + CSS Clock</title>
+	</head>
+	<body>
+		<div class="clock">
+			<div class="clock-face">
+				<div class="hand hour-hand"></div>
+				<div class="hand min-hand"></div>
+				<div class="hand second-hand"></div>
+			</div>
+		</div>
+
+		<style>
+			html {
+				background: #018ded url(https://unsplash.it/1500/1000?image=881&blur=5);
+				background-size: cover;
+				font-family: "helvetica neue";
+				text-align: center;
+				font-size: 10px;
+			}
+
+			body {
+				margin: 0;
+				font-size: 2rem;
+				display: flex;
+				flex: 1;
+				min-height: 100vh;
+				align-items: center;
+			}
+
+			.clock {
+				width: 30rem;
+				height: 30rem;
+				border: 20px solid white;
+				border-radius: 50%;
+				margin: 50px auto;
+				position: relative;
+				padding: 2rem;
+				box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
+					inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+			}
+
+			.clock-face {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				transform: translateX(
+					-3px
+				); /* account for the width of the clock hands */
+			}
+
+			.hand {
+				width: 6px;
+				height: 50%;
+				background: black;
+				position: absolute;
+				left: 50%;
+				transform-origin: bottom;
+				transition: all 0.03s cubic-bezier(0.17, 1.37, 0.15, 1.46);
+			}
+
+			.glitchFix {
+				transition: all 0s;
+			}
+		</style>
+
+		<script>
+			/*
+			 *When a hand ticks over 360 degrees, it blinks. *This is because to go from 360 to 6 or 30 degree *during transition, it *turns anti-clockwise *rather than closewise
+			 *To fix it, we either make transition time = 0 when it's about to go from 360 to 6 or 30 degrees, or we keep adding the numbers wihout resetting to 0. The code below makes transition time = 0.
+			 */
+			updateTime();
+			setInterval(updateTime, 1000);
+
+			function updateTime() {
+				let time = new Date();
+
+				let hours = time.getHours();
+				let hourHand = document.querySelector(".hour-hand");
+				let mins = time.getMinutes();
+				let minHand = document.querySelector(".min-hand");
+				let seconds = time.getSeconds();
+				let secondHand = document.querySelector(".second-hand");
+
+        fixGlitch(hourHand, hours);
+        fixGlitch(minHand, mins);
+        fixGlitch(secondHand, seconds);
+
+				hourHand.style.transform = `rotate(${hours * 30}deg)`;
+
+				minHand.style.transform = `rotate(${mins * 6}deg)`;
+
+				secondHand.style.transform = `rotate(${seconds * 6}deg)`;
+			}
+
+			function fixGlitch(hand, unit) {
+        if (unit === 0) {
+          hand.classList.add("glitchFix");
+        }
+
+        if (unit === 1) {
+          hand.classList.remove("glitchFix");
+        }
+			}
+		</script>
+	</body>
+</html>
