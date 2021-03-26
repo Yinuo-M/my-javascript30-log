@@ -6,4 +6,4 @@
 
 # questions
 
-- none
+- How to track whether the mouse has left the window? Mouseout event does not seem to trigger when the mouse went straight from the element to outside of the window.
