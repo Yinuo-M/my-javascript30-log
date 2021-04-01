@@ -6,4 +6,4 @@
 
 # questions
 
-- Why is togglePlay not working properly once the video is in fullscreen? Because HTML5 video controls are visible in fullscreen mode even if it's disabled in the HTML markup. To solve the problem, we need to understand shadowDOM. I will look into these two pages to understand what exactly is goin on https://css-tricks.com/custom-controls-in-html5-video-full-screen/ https://javascript.info/shadow-dom
+- Why is togglePlay not working properly once the video is in fullscreen? Because HTML5 video controls are visible in fullscreen mode even if it's disabled in the HTML markup. To solve the problem, we need to understand shadowDOM. I will look into these two pages to understand what exactly is going on https://css-tricks.com/custom-controls-in-html5-video-full-screen/ https://javascript.info/shadow-dom
