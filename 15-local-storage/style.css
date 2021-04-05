@@ -57,6 +57,7 @@ h2 {
 	cursor: pointer;
 }
 
+/*NOTE This will be read out to screen readers. display: none will hide the checkbox for all users*/
 .plates input {
 	position: absolute;
 	left: -10000px;
